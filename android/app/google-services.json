@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "292139029962",
+    "project_id": "casemanager-1ef1f",
+    "storage_bucket": "casemanager-1ef1f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292139029962:android:fa9ffc33753c816cf5ab33",
+        "android_client_info": {
+          "package_name": "com.example.case_manager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUamsYIQFW75BX1-WgjK1kBVdDKmVUL14"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
