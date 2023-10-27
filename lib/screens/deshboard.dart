@@ -26,12 +26,7 @@ class _dashboardState extends State<dashboard> {
         backgroundColor: Colors.deepPurple,
         title: Text("Home"),
         actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Main_screen()));
-              },
-              icon: Icon(Icons.more_vert_outlined))
+          IconButton(onPressed: () {}, icon: Icon(Icons.more_vert_outlined))
         ],
       ),
       body: Container(
