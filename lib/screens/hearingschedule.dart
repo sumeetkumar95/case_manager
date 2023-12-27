@@ -1,3 +1,4 @@
+import 'package:case_manager/forms/hearing_form.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -16,15 +17,23 @@ class _HearingScheduleState extends State<HearingSchedule> {
       appBar: AppBar(
           backgroundColor: Colors.deepPurple,
           actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
-          title: Text("Hearing Scheduler")),
+          title: const Text("Hearing Scheduler")),
       floatingActionButton: FloatingActionButton(
+        // onPressed: () {
+        // setState(() {
+        //   users.add({
+        //     "name": "id " + (users.length + 1).toString(),
+        //     "email": "Users" + (users.length + 1).toString() + "@gmail.com"
+        //   });
+        // });
+        // Navigator.push(
+        //     context, MaterialPageRoute(builder: (context) => hearingForm()));
+        // },
         onPressed: () {
-          setState(() {
-            users.add({
-              "name": "id " + (users.length + 1).toString(),
-              "email": "Users" + (users.length + 1).toString() + "@gmail.com"
-            });
-          });
+          showDialog(
+            context: context,
+            builder: (BuildContext context) => _buildPopupDialog(context),
+          );
         },
         child: FaIcon(FontAwesomeIcons.plus),
       ),
@@ -51,4 +60,48 @@ class _HearingScheduleState extends State<HearingSchedule> {
           )),
     );
   }
+}
+
+Widget _buildPopupDialog(BuildContext context) {
+  return new AlertDialog(
+    //title: const Text('Form'),
+    content: new Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        TextFormField(
+          decoration: InputDecoration(
+              labelText: "Hearing Type",
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        TextFormField(
+          decoration: InputDecoration(
+              labelText: "Judge Name",
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        TextFormField(
+          decoration: InputDecoration(
+              labelText: "Hearing Venue",
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
+        )
+      ],
+    ),
+    actions: <Widget>[
+      new TextButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        child: const Text('Save'),
+      ),
+    ],
+  );
 }
