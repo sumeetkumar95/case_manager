@@ -64,7 +64,7 @@ class _HearingScheduleState extends State<HearingSchedule> {
 
 Widget _buildPopupDialog(BuildContext context) {
   return new AlertDialog(
-    //title: const Text('Form'),
+    title: const Text('Hearing Form'),
     content: new Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,11 +96,13 @@ Widget _buildPopupDialog(BuildContext context) {
       ],
     ),
     actions: <Widget>[
-      new TextButton(
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-        child: const Text('Save'),
+      Center(
+        child: new TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Text('Save'),
+        ),
       ),
     ],
   );
