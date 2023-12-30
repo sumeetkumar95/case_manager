@@ -43,10 +43,10 @@ class _RegisterState extends State<Register> {
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 70),
+                  padding: EdgeInsets.only(top: 100),
                   child: Container(
                     child: Text(
-                      "Register",
+                      "Register Here",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 40,
@@ -173,7 +173,7 @@ class _RegisterState extends State<Register> {
                       style: ButtonStyle(
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
-                                 RoundedRectangleBorder(
+                                  RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18.0),
                       )))),
                 ),
@@ -184,7 +184,7 @@ class _RegisterState extends State<Register> {
               ],
             ),
           ),
-         ),
+        ),
       ),
     );
   }

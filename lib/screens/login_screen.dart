@@ -1,3 +1,4 @@
+import 'package:case_manager/screens/ForgetPass.dart';
 import 'package:case_manager/screens/deshboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -40,10 +41,10 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 100),
+                  padding: EdgeInsets.only(top: 130),
                   child: Container(
                     child: Text(
-                      "Login",
+                      "Login Here",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 40,
@@ -53,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 100,
+                  height: 50,
                 ),
 
                 const SizedBox(
@@ -105,9 +106,26 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                 ),
-                SizedBox(
-                  height: 30,
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 200),
+                  child: Container(
+                    width: 150,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => forgetPass()));
+                      },
+                      child: Text("Forget Password"),
+                    ),
+                  ),
                 ),
+                SizedBox(
+                  height: 20,
+                ),
+
                 Container(
                   width: 150,
                   child: ElevatedButton(
@@ -128,9 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(18.0),
                       )))),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+
                 // SizedBox(height: 10),
               ],
             ),

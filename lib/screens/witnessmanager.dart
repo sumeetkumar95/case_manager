@@ -32,14 +32,14 @@ class _WitnessManagerState extends State<WitnessManager> {
 
 Widget _buildPopupDialog(BuildContext context) {
   return new AlertDialog(
-    title: const Text('Hearing Form'),
+    title: const Text('witness Details'),
     content: new Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         TextFormField(
           decoration: InputDecoration(
-              labelText: "Hearing Type",
+              labelText: "Witness Id",
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
         ),
@@ -48,7 +48,7 @@ Widget _buildPopupDialog(BuildContext context) {
         ),
         TextFormField(
           decoration: InputDecoration(
-              labelText: "Judge Name",
+              labelText: "Witness Name",
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
         ),
@@ -57,7 +57,7 @@ Widget _buildPopupDialog(BuildContext context) {
         ),
         TextFormField(
           decoration: InputDecoration(
-              labelText: "Hearing Venue",
+              labelText: "Witness Description",
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
         )
