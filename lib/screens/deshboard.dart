@@ -14,6 +14,8 @@ import 'package:flutter/material.dart';
 //import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'clients.dart';
+
 class dashboard extends StatefulWidget {
   const dashboard({super.key});
 
@@ -37,6 +39,7 @@ class _dashboardState extends State<dashboard> {
           ],
         ),
         body: Container(
+          
           color: Colors.blueGrey.shade200,
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 7),
           child: GridView(
@@ -44,7 +47,7 @@ class _dashboardState extends State<dashboard> {
               InkWell(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MyCases()));
+                      MaterialPageRoute(builder: (context) => ClientScreen()));
                 },
                 child: Container(
                   decoration: BoxDecoration(

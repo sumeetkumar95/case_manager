@@ -17,6 +17,7 @@ class _EvidenceOrganizerState extends State<EvidenceOrganizer> {
         backgroundColor: Colors.deepPurple,
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
       ),
+      
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(

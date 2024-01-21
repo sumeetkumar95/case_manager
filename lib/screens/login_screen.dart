@@ -20,9 +20,12 @@ class _LoginScreenState extends State<LoginScreen> {
     auth
         .signInWithEmailAndPassword(
             email: emailController.text, password: passwordController.text)
-        .catchError(
-          (e) => print(e.toString()),
-        );
+        .then((value) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => dashboard()));
+    }).catchError(
+      (e) => print(e.toString()),
+    );
   }
 
   @override
@@ -132,10 +135,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
                           login();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => dashboard()));
                         }
                       },
                       child: Text("Login"),

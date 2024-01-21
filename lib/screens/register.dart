@@ -1,4 +1,5 @@
 import 'package:case_manager/screens/login_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,21 +12,39 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  late TextEditingController usernameController = TextEditingController();
+  late TextEditingController nameController = TextEditingController();
   late TextEditingController emailController = TextEditingController();
-  late TextEditingController passwordController = TextEditingController();
-  late TextEditingController confirmPasswordController =
+  late TextEditingController phoneController = TextEditingController();
+  late TextEditingController PasswordController =
       TextEditingController();
-  final FirebaseAuth auth = FirebaseAuth.instance;
-  final formKey = GlobalKey<FormState>();
 
-  void register() {
-    auth
-        .createUserWithEmailAndPassword(
-            email: emailController.text, password: passwordController.text)
-        .catchError(
-          (e) => print(e.toString()),
-        );
+  final formKey = GlobalKey<FormState>();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  Future<void> _signup() async {
+    try {
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: PasswordController.text,
+      );
+
+      // Get the UID of the newly created user
+      String uid = userCredential.user!.uid;
+
+      // Add user data to Firestore
+      await _firestore.collection('users').doc(uid).set({
+        'name': nameController.text,
+        'phone': phoneController.text,
+        'email': emailController.text.trim(),
+        'password': PasswordController.text,
+        // Add other fields as needed
+      });
+
+      print('User signed up successfully!');
+    } catch (e) {
+      print('Error during signup: $e');
+    }
   }
 
   @override
@@ -62,18 +81,18 @@ class _RegisterState extends State<Register> {
                 Container(
                   width: MediaQuery.of(context).size.width * 0.8,
                   child: TextFormField(
-                    controller: usernameController,
+                    controller: nameController,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.verified_user_rounded),
-                      labelText: "Username",
+                      labelText: "Name",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Please enter a username';
+                        return 'Please enter a Name';
                       } else {
                         return null;
                       }
@@ -111,7 +130,32 @@ class _RegisterState extends State<Register> {
                   width: MediaQuery.of(context).size.width * 0.8,
                   child: TextFormField(
                     keyboardType: TextInputType.text,
-                    controller: passwordController,
+                    controller: phoneController,
+                    decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.lock),
+                        labelText: "Phone Number",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        suffixIcon: Icon(Icons.remove_red_eye_rounded)),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter your Phone number';
+                      } else {
+                        return null;
+                      }
+                    },
+                    obscureText: true,
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  child: TextFormField(
+                    keyboardType: TextInputType.text,
+                    controller: PasswordController,
                     decoration: InputDecoration(
                         prefixIcon: Icon(Icons.lock),
                         labelText: "Password",
@@ -133,40 +177,18 @@ class _RegisterState extends State<Register> {
                   height: 30,
                 ),
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    controller: confirmPasswordController,
-                    decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.lock),
-                        labelText: "Confirm Password",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        suffixIcon: Icon(Icons.remove_red_eye_rounded)),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter your confirm Password';
-                      } else {
-                        return null;
-                      }
-                    },
-                    obscureText: true,
-                  ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Container(
                   width: 150,
                   child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: ()async {
                         if (formKey.currentState!.validate()) {
-                          register();
-                          Navigator.push(
+                         await _signup();
+                         setState(() {
+                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LoginScreen()));
+                                  builder: (context) => const LoginScreen()));
+                         });
+                          
                         }
                       },
                       child: Text("Register"),

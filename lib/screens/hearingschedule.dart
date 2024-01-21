@@ -142,7 +142,7 @@ class _HearingScheduleState extends State<HearingSchedule> {
               },
               child: Container(
                 width: double.infinity,
-                height: 50,
+                height: 30,
                 child: Text(selectedDate != null
                     ? (selectedDate!.toLocal().toString().split(' ')[0])
                     : "Select Date"),
